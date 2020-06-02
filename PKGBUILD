@@ -2,7 +2,7 @@ pkgname="ros-noetic-panda-moveit-config"
 pkgver="0.7.4"
 pkgrel=1
 pkgdesc="Franka Emika Panda MoveIt! Config Package"
-arch=('i68q' 'x86_64' 'aarch64' 'armv7h' 'armv6h')
+arch=('i686' 'x86_64' 'aarch64' 'armv7h' 'armv6h')
 url="http://wiki.ros.org/panda_moveit_config"
 license=('Apache')
 
@@ -22,8 +22,6 @@ depends=(
     ${ros_depends[@]}
 )
 
-provides=($pkgname)
-conflicts=($pkgname)
 source=("panda_moveit_config-$pkgver.tar.gz::https://github.com/ros-planning/panda_moveit_config/archive/$pkgver.tar.gz")
 sha256sums=(d989d7a854cf65f994add6090e9a5609ae19bbe3b46c223c9ca9aceec0d357d1)
 
@@ -39,10 +37,9 @@ build() {
 
 	# Build project
 	cmake ${srcdir}/panda_moveit_config-$pkgver \
-	      -DCMAKE_BUILD_TYPE=Release \
 	      -DCATKIN_BUILD_BINARY_PACKAGE=ON \
 	      -DCMAKE_INSTALL_PREFIX=/opt/ros/noetic \
-	      -DPYTHON_EXECUTABLE=/usr/bin/python3 \
+	      -DPYTHON_EXECUTABLE=/usr/bin/python \
 	      -DSETUPTOOLS_DEB_LAYOUT=OFF
 	make
 }
